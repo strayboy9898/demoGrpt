@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - openjdk8
+os:
+  - linux
+
+cache:
+  directories:
+   - $HOME/.m2
+
+before_script: cd core
+script: 
+  - mvn clean compile
+  - mvn surefire:test
