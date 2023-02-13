@@ -1,6 +1,6 @@
 package com.demo.spring.grpc.core.controller;
 
-import com.demo.spring.grpc.core.model.PingRequest;
+import com.demo.spring.grpc.core.schema.PingRequest;
 import com.demo.spring.grpc.core.service.PingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @Slf4j
-public class PingController {
+public class  PingController {
     @Autowired
     private PingService pingService;
 

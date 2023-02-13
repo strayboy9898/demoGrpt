@@ -1,8 +1,8 @@
 package com.demo.spring.grpc.core.controller;
 
-import com.demo.spring.grpc.core.model.CoreServiceGrpc;
-import com.demo.spring.grpc.core.model.PingRequest;
-import com.demo.spring.grpc.core.model.PingResponse;
+import com.demo.spring.grpc.core.schema.CoreServiceGrpc;
+import com.demo.spring.grpc.core.schema.PingRequest;
+import com.demo.spring.grpc.core.schema.PingResponse;
 import com.demo.spring.grpc.core.service.PingService;
 
 
