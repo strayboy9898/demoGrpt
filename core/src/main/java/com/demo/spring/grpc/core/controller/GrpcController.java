@@ -1,5 +1,7 @@
 package com.demo.spring.grpc.core.controller;
 
+import com.demo.spring.grpc.core.schema.CheckDriverId;
+import com.demo.spring.grpc.core.schema.DriverEntity;
 import com.demo.spring.grpc.core.schema.CoreServiceGrpc;
 import com.demo.spring.grpc.core.schema.PingRequest;
 import com.demo.spring.grpc.core.schema.PingResponse;
@@ -21,6 +23,15 @@ public class GrpcController extends CoreServiceGrpc.CoreServiceImplBase {
     @Override
     public void ping(PingRequest request, StreamObserver<PingResponse> responseObserver) {
         responseObserver.onNext(pingService.ping(request));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void checkDriver(CheckDriverId checkDriverId, StreamObserver<DriverEntity> responseObserver) {
+        DriverEntity reply = DriverEntity.newBuilder()
+                .setName("Hello again " )
+                .build();
+        responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 }
