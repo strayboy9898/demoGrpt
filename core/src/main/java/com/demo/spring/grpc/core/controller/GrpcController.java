@@ -1,10 +1,6 @@
 package com.demo.spring.grpc.core.controller;
 
-import com.demo.spring.grpc.core.schema.CheckDriverId;
-import com.demo.spring.grpc.core.schema.DriverEntity;
-import com.demo.spring.grpc.core.schema.CoreServiceGrpc;
-import com.demo.spring.grpc.core.schema.PingRequest;
-import com.demo.spring.grpc.core.schema.PingResponse;
+import com.demo.spring.grpc.core.schema.*;
 import com.demo.spring.grpc.core.service.PingService;
 
 
@@ -32,6 +28,12 @@ public class GrpcController extends CoreServiceGrpc.CoreServiceImplBase {
                 .setName("Hello again " )
                 .build();
         responseObserver.onNext(reply);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void checkCustomer(CheckCustomerNumber customerNumber, StreamObserver<CustomerEntity> responseObserver) {
+        responseObserver.onNext(pingService.findCustomer(customerNumber));
         responseObserver.onCompleted();
     }
 }

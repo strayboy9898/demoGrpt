@@ -1,27 +1,37 @@
 package com.demo.spring.grpc.core;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
-import java.io.File;
+import javax.persistence.EntityManagerFactory;
+
 @SpringBootApplication
-public class CoreApplication implements DisposableBean, CommandLineRunner {
+@Configuration
+@EnableJpaRepositories
+public class CoreApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CoreApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) {
-        String pidFile = System.getProperty("pidfile");
-        if (pidFile != null) {
-            new File(pidFile).deleteOnExit();
-        }
-    }
+//    @Bean
+//    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory emf) {
+//        HibernateJpaSessionFactoryBean factory = new HibernateJpaSessionFactoryBean();
+//        factory.setEntityManagerFactory(emf);
+//        return factory;
+//    }
 
-    @Override
-    public void destroy() {
+    @Bean(name="entityManagerFactory")
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+
+        return sessionFactory;
     }
 }

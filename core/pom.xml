@@ -113,7 +113,20 @@
       <artifactId>mysql-connector-java</artifactId>
       <!--<scope>runtime</scope>-->
     </dependency>
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-apt</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
+    <dependency>
+      <groupId>com.querydsl</groupId>
+      <artifactId>querydsl-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -152,6 +165,14 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.github.darrachequesne/spring-data-jpa-datatables -->
+    <dependency>
+      <groupId>com.github.darrachequesne</groupId>
+      <artifactId>spring-data-jpa-datatables</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+
 
     <!-- kafka -->
     <dependency>
@@ -203,6 +224,7 @@
         <artifactId>os-maven-plugin</artifactId>
       </extension>
     </extensions>
+
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -218,6 +240,32 @@
             <goals>
               <goal>repackage</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/docker</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/classes</directory>
+                  <includes>
+                    <include>*.yml</include>
+                    <include>*.properties</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
           </execution>
         </executions>
       </plugin>

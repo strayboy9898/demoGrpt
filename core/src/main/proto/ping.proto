@@ -27,8 +27,26 @@ message DriverEntity {
     string numberPhone = 4;
 }
 
+message CheckCustomerNumber {
+    int32 customerNumber = 1;
+}
+
+message CustomerEntity {
+    int32 customerNumber = 1;
+    string customerName = 2;
+    string contactLastName = 3;
+    string phone = 4;
+    string addressLine1 = 5;
+    string addressLine2 = 6;
+    string city = 7;
+    string state = 8;
+    string postalCode = 9;
+}
+
 service CoreService {
     rpc Ping (PingRequest) returns (PingResponse) {}
 
     rpc CheckDriver (CheckDriverId) returns (DriverEntity) {}
+
+    rpc CheckCustomer (CheckCustomerNumber) returns (CustomerEntity) {}
 }
