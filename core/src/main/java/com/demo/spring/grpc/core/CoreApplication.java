@@ -1,5 +1,7 @@
 package com.demo.spring.grpc.core;
 
+import com.demo.spring.grpc.core.service.PingService;
+import org.apache.commons.lang3.function.FailableRunnable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +12,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootApplication
 @Configuration
@@ -21,17 +26,11 @@ public class CoreApplication {
         SpringApplication.run(CoreApplication.class, args);
     }
 
-//    @Bean
-//    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory emf) {
-//        HibernateJpaSessionFactoryBean factory = new HibernateJpaSessionFactoryBean();
-//        factory.setEntityManagerFactory(emf);
-//        return factory;
+
+//    @Bean(name="entityManagerFactory")
+//    public LocalSessionFactoryBean sessionFactory() {
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//
+//        return sessionFactory;
 //    }
-
-    @Bean(name="entityManagerFactory")
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-
-        return sessionFactory;
-    }
 }
